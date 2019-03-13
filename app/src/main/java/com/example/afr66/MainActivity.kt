@@ -10,20 +10,15 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BookFragment.OnListFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -33,12 +28,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        if(savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
+            nav_view.setCheckedItem(R.id.nav_myBooks)
+        }
+
     }
-
-
-//    override fun onListItemClick(l: ListView?, v: View?, friendId: Int, id: Long) {
-//        Log.d("FOO", "$friendId")
-//    }
 
 
     override fun onBackPressed() {
@@ -69,28 +64,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_myBooks -> {
-                // Handle the camera action
-                val intent = Intent(this, MyBooksActivity::class.java)
-                // start your next activity
-                startActivity(intent)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
             }
-//            R.id.nav_gallery -> {
-//            }
-//            R.id.nav_slideshow -> {
-//
-//            }
-//            R.id.nav_manage -> {
-//
-//            }
-//            R.id.nav_share -> {
-//
-//            }
-//            R.id.nav_send -> {
-//
-//            }
+            R.id.nav_search -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProfileFragment()).commit()
+            }
+            R.id.nav_logout -> {
+                Toast.makeText(this, "Pls don't log out", Toast.LENGTH_LONG).show()
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onListFragmentInteraction(item: Book?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
