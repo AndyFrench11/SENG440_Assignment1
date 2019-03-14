@@ -1,9 +1,12 @@
 package com.example.afr66
 
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +15,8 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BookFragment.OnListFragmentInteractionListener {
 
@@ -67,7 +72,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
             }
             R.id.nav_search -> {
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProfileFragment()).commit()
+                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
             }
             R.id.nav_logout -> {
                 Toast.makeText(this, "Pls don't log out", Toast.LENGTH_LONG).show()
@@ -79,6 +84,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onListFragmentInteraction(item: Book?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(this, IndividualBookActivity::class.java)
+        intent.putExtra("bookName", item?.content)
+        startActivity(intent)
+        overridePendingTransition(R.anim.enter, R.anim.exit)
+
+
+
     }
 }
