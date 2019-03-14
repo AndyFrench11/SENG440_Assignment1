@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
             }
             R.id.nav_search -> {
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SearchFragment()).commit()
             }
             R.id.nav_logout -> {
                 Toast.makeText(this, "Pls don't log out", Toast.LENGTH_LONG).show()
