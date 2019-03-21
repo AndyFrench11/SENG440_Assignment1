@@ -1,11 +1,17 @@
 package com.example.afr66
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.json.JSONObject
+import java.io.BufferedInputStream
+import java.net.URL
+import java.nio.charset.Charset
+import javax.net.ssl.HttpsURLConnection
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,8 +29,21 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val parameters = mapOf("q" to "quilting")
+        val url = parameterizeUrl("https://www.googleapis.com/books/v1/volumes", parameters)
+
+        BookDownloader().execute(url)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
+    fun parameterizeUrl(url: String, parameters: Map<String, String>): URL {
+        val builder = Uri.parse(url).buildUpon()
+        parameters.forEach { key, value -> builder.appendQueryParameter(key, value) }
+        val uri = builder.build()
+        return URL(uri.toString())
     }
 
 

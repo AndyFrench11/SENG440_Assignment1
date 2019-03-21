@@ -27,10 +27,10 @@ class BookFragment : Fragment() {
     val exampleItems: MutableList<Book> = ArrayList()
 
     fun initaliseValues() {
-        exampleItems.add(Book("1", "Harry Potter", "Five"))
-        exampleItems.add(Book("2", "The Hunger Games", "Five"))
-        exampleItems.add(Book("3", "Prometheus", "Five"))
-        exampleItems.add(Book("4", "Game of Thrones", "Five"))
+        exampleItems.add(Book("1", "Harry Potter"))
+        exampleItems.add(Book("2", "The Hunger Games"))
+        exampleItems.add(Book("3", "Prometheus"))
+        exampleItems.add(Book("4", "Game of Thrones"))
     }
 
     override fun onCreateView(

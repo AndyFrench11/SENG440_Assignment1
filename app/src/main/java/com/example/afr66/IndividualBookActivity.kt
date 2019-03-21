@@ -22,7 +22,7 @@ class IndividualBookActivity : Activity() {
         nameLabel.text = bookName
 
         toolbar = findViewById(R.id.toolbar)
-        //toolbar.setNavigationIcon()
+
         setActionBar(toolbar)
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
