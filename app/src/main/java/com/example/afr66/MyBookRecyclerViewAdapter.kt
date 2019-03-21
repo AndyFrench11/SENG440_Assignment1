@@ -1,5 +1,6 @@
 package com.example.afr66
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +15,12 @@ import kotlinx.android.synthetic.main.fragment_book.view.*
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
  */
 class MyBookRecyclerViewAdapter(
+
     private val mValues: List<Book>,
     private val mListener: OnListFragmentInteractionListener?
+
 ) : RecyclerView.Adapter<MyBookRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -26,9 +28,12 @@ class MyBookRecyclerViewAdapter(
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Book
+            //selectedIndex = v.adapterPosition
+            notifyItemChanged(selectedIndex)
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
+
         }
     }
 
@@ -38,10 +43,14 @@ class MyBookRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
+    private var selectedIndex: Int = RecyclerView.NO_POSITION
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.mIdView.text = item.id
         holder.mContentView.text = item.content
+
+        holder.isActive = selectedIndex == position
 
         with(holder.mView) {
             tag = item
@@ -54,6 +63,12 @@ class MyBookRecyclerViewAdapter(
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.item_number
         val mContentView: TextView = mView.content
+
+        var isActive: Boolean = false
+            set(value) {
+                field = value
+                itemView.setBackgroundColor(if(value) Color.LTGRAY else Color.TRANSPARENT)
+            }
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"

@@ -21,9 +21,6 @@ import android.support.v7.widget.DividerItemDecoration
  */
 class BookFragment : Fragment() {
 
-    // TODO: Customize parameters
-    private var columnCount = 1
-
     private var listener: OnListFragmentInteractionListener? = null
 
 
@@ -46,11 +43,9 @@ class BookFragment : Fragment() {
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
+                layoutManager = LinearLayoutManager(context)
                 adapter = MyBookRecyclerViewAdapter(exampleItems, listener)
+                //val dividerItemDecoration = DividerItemDecoration(this.context, layoutManager.orientation)
                 val dividerItemDecoration = DividerItemDecoration(this.context, 1)
                 this.addItemDecoration(dividerItemDecoration)
             }
@@ -62,8 +57,6 @@ class BookFragment : Fragment() {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {
             listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
     }
 

@@ -90,6 +90,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         overridePendingTransition(R.anim.enter, R.anim.exit)
 
 
-
     }
 }

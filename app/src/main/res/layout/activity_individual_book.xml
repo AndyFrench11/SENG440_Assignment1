@@ -5,29 +5,31 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".IndividualBookActivity">
+        tools:context=".IndividualBookActivity"
+        android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:theme="@style/AppTheme.AppBarOverlay"
+            >
 
-        <android.support.v7.widget.Toolbar
+        <Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                android:theme="@style/AppTheme.AppBarOverlay"
-                android:elevation="4dp"/>
+                android:elevation="4dp"
+                />
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:paddingTop="20dp"
-                                                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="55dp">
 
         <TextView
                 android:id="@+id/NameLabel"
