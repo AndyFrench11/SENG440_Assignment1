@@ -69,6 +69,8 @@ class SearchFragment : Fragment() {
 
                 bookDownloader.execute(Sender(url, viewAdapter))
 
+                searchBox.clearFocus()
+
                 return true
             }
 

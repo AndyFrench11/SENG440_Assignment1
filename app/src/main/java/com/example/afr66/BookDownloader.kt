@@ -67,8 +67,13 @@ class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {
                 }
             }
 
-            val imageLinks = volumeInfo.getJSONObject("imageLinks")
-            val thumbnailURL = imageLinks.getString("thumbnail")
+            var thumbnailURL = ""
+            if(volumeInfo.has("imageLinks")) {
+                val imageLinks = volumeInfo.getJSONObject("imageLinks")
+                thumbnailURL = imageLinks.getString("thumbnail")
+            }
+
+
 
             Book(title, subtitle, description, pageCount, authors, publishedDate, categories, thumbnailURL)
 
