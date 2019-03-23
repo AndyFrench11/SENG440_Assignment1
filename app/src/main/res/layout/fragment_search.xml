@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".SearchFragment">
-
-    <TextView
-            android:layout_width="178dp"
-            android:layout_height="80dp"
-            android:text="Search Page"
-            android:id="@+id/textView2" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/searchView" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SearchFragment"
+        android:orientation="vertical">
 
     <SearchView
-            android:layout_width="288dp"
-            android:layout_height="64dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" android:id="@+id/searchView"/>
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/searchView"
+            android:background="@drawable/search_background"
+            />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/search_list"
+            android:name="com.example.afr66.SearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="656dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".SearchFragment"
+            tools:listitem="@layout/fragment_search_book"
+            android:theme="@style/AppTheme.PopupOverlay"
+            android:background="@android:color/background_light"/>
+
+</LinearLayout>

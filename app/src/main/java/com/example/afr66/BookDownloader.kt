@@ -10,28 +10,78 @@ import java.net.URL
 import java.nio.charset.Charset
 import java.security.AccessController.getContext
 import javax.net.ssl.HttpsURLConnection
+import android.R.attr.key
+import org.json.JSONArray
 
-class BookDownloader() :  AsyncTask<URL, Void, List<Book>>() {
 
-    override fun doInBackground(vararg urls: URL): List<Book> {
-        val url = urls[0]
+class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {
+
+    var finalBooks : List<Book> = emptyList()
+    var adapter : MySearchBookRecyclerViewAdapter = MySearchBookRecyclerViewAdapter(emptyList())
+
+    override fun doInBackground(vararg sender: SearchFragment.Sender): List<Book> {
+
+        adapter = sender[0].adapter
+        val url = sender[0].url
         val result = getJson(url)
+        val itemsArray = result.getJSONArray("items")
+        val books = (0 until itemsArray.length()).map { i ->
+            val book = itemsArray.getJSONObject(i)
+            val volumeInfo = book.getJSONObject("volumeInfo")
+            val title = volumeInfo.getString("title")
+            var subtitle = ""
 
-        val booksJson = result.getJSONArray("articles")
-        val books = emptyList<Book>()
-//        val books = (0 until booksJson.length()).map { i ->
-//            val book = booksJson.getJSONObject(i)
-//            Book(book.getString("title"), book.getString("url"))
-//        }
+            if(volumeInfo.has("subtitile")) {
+                subtitle = volumeInfo.getString("subtitle")
+            }
+
+            var description = ""
+            if(volumeInfo.has("description")) {
+                description = volumeInfo.getString("description")
+            }
+
+
+            var pageCount = 0
+            if(volumeInfo.has("pageCount")) {
+                pageCount = volumeInfo.getInt("pageCount")
+            }
+
+            val authorsArray = volumeInfo.getJSONArray("authors")
+            val authors = (0 until authorsArray.length()).map { i ->
+                val author = authorsArray.getString(i)
+                author
+            }
+
+            var publishedDate = ""
+            if(volumeInfo.has("publishedDate")) {
+                publishedDate = volumeInfo.getString("publishedDate")
+            }
+
+
+            var categories = emptyList<String>()
+            if(volumeInfo.has("categories")) {
+                val categoriesArray = volumeInfo.getJSONArray("categories")
+                categories = (0 until categoriesArray.length()).map { i ->
+                    val category = categoriesArray.getString(i)
+                    category
+                }
+            }
+
+            val imageLinks = volumeInfo.getJSONObject("imageLinks")
+            val thumbnailURL = imageLinks.getString("thumbnail")
+
+            Book(title, subtitle, description, pageCount, authors, publishedDate, categories, thumbnailURL)
+
+        }
+
 
         return books
 
     }
 
-    override fun onPostExecute(result: List<Book>?) {
+    override fun onPostExecute(result: List<Book>) {
         super.onPostExecute(result)
-        println("On post Execute")
-        //Toast.makeText(getContext(), result?.joinToString(","), Toast.LENGTH_SHORT).show()
+        adapter.update(result)
     }
 
     fun getJson(url: URL): JSONObject {
@@ -43,6 +93,7 @@ class BookDownloader() :  AsyncTask<URL, Void, List<Book>>() {
             connection.disconnect()
         }
     }
+
 
 
 

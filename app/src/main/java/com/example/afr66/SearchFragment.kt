@@ -1,23 +1,29 @@
 package com.example.afr66
 
 
+import android.content.Context
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_book.view.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import org.json.JSONObject
 import java.io.BufferedInputStream
 import java.net.URL
 import java.nio.charset.Charset
+import java.util.ArrayList
 import javax.net.ssl.HttpsURLConnection
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,18 +31,57 @@ private const val ARG_PARAM2 = "param2"
  */
 class SearchFragment : Fragment() {
 
+    private lateinit var searchBox : android.widget.SearchView
+    private var viewAdapter : MySearchBookRecyclerViewAdapter = MySearchBookRecyclerViewAdapter(emptyList())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val parameters = mapOf("q" to "quilting")
-        val url = parameterizeUrl("https://www.googleapis.com/books/v1/volumes", parameters)
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
 
-        BookDownloader().execute(url)
+        val recyclerView = (view as ViewGroup).getChildAt(1)
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        // Set the adapter
+        if (recyclerView is RecyclerView) {
+            with(view) {
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.adapter = viewAdapter
+                val dividerItemDecoration = DividerItemDecoration(this.context, 1)
+                recyclerView.addItemDecoration(dividerItemDecoration)
+            }
+        }
+
+        searchBox = view.findViewById(R.id.searchView)
+
+        searchBox.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val parameters = mapOf("q" to searchView.query.toString())
+                val url = parameterizeUrl("https://www.googleapis.com/books/v1/volumes", parameters)
+
+                val bookDownloader = BookDownloader()
+
+                bookDownloader.execute(Sender(url, viewAdapter))
+
+                return true
+            }
+
+        })
+
+
+        return view
+
+    }
+
+    fun updateSearchRecyclerView(finalBooks: List<Book>) {
+        viewAdapter.update(finalBooks)
+
     }
 
     fun parameterizeUrl(url: String, parameters: Map<String, String>): URL {
@@ -44,6 +89,10 @@ class SearchFragment : Fragment() {
         parameters.forEach { key, value -> builder.appendQueryParameter(key, value) }
         val uri = builder.build()
         return URL(uri.toString())
+    }
+
+    inner class Sender(val url: URL, val adapter: MySearchBookRecyclerViewAdapter)  {
+
     }
 
 

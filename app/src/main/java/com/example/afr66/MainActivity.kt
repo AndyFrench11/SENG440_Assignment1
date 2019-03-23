@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(savedInstanceState == null) {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
             nav_view.setCheckedItem(R.id.nav_myBooks)
+            toolbar.title = "My Books"
         }
 
     }
@@ -67,12 +69,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
+
         when (item.itemId) {
             R.id.nav_myBooks -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
+                toolbar.title = "My Books"
             }
             R.id.nav_search -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SearchFragment()).commit()
+                toolbar.title = "Search"
             }
             R.id.nav_logout -> {
                 Toast.makeText(this, "Pls don't log out", Toast.LENGTH_LONG).show()
@@ -85,7 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onListFragmentInteraction(item: Book?) {
         val intent = Intent(this, IndividualBookActivity::class.java)
-        intent.putExtra("bookName", item?.content)
+        intent.putExtra("bookName", item?.title)
         startActivity(intent)
         overridePendingTransition(R.anim.enter, R.anim.exit)
 
