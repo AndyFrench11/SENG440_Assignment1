@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 
 
 import com.example.afr66.BookFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_book.view.*
+import kotlinx.android.synthetic.main.fragment_search_book.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -49,6 +51,13 @@ class MyBookRecyclerViewAdapter(
         val item = mValues[position]
         //holder.mIdView.text = item.id
         holder.mContentView.text = item.title
+        holder.mDetailsView.text = "Chapter: 5 - Page: 167"
+
+        // Display an image to image view from url
+        if(item.thumbnailURL != "") {
+            DownloadBookImageTask(holder.mImageView)
+                .execute(item.thumbnailURL)
+        }
 
         holder.isActive = selectedIndex == position
 
@@ -61,8 +70,9 @@ class MyBookRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        //val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val mImageView : ImageView = mView.myBookPhoto
+        val mContentView: TextView = mView.myBookTitle
+        val mDetailsView: TextView = mView.myBookDetails
 
         var isActive: Boolean = false
             set(value) {

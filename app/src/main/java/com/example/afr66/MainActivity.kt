@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityOptionsCompat
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BookFragment.OnListFragmentInteractionListener {
 
+    var currentBooks : MutableList<Book> = ArrayList<Book>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         if(savedInstanceState == null) {
+
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
             nav_view.setCheckedItem(R.id.nav_myBooks)
             toolbar.title = "My Books"
@@ -80,7 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 toolbar.title = "Search"
             }
             R.id.nav_logout -> {
-                Toast.makeText(this, "Pls don't log out", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "No don't leave!!!!!!!", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -94,6 +98,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(intent)
         overridePendingTransition(R.anim.enter, R.anim.exit)
 
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStart() {
+        super.onStart()
 
     }
 }

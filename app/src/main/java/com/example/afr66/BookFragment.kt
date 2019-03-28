@@ -19,23 +19,22 @@ import android.support.v7.widget.DividerItemDecoration
  * Activities containing this fragment MUST implement the
  * [BookFragment.OnListFragmentInteractionListener] interface.
  */
-class BookFragment : Fragment() {
+class BookFragment() : Fragment() {
+    //nstead, arguments can be supplied by the caller with setArguments(Bundle) and later retrieved by the Fragment with getArguments().
 
     private var listener: OnListFragmentInteractionListener? = null
 
+    var currentBooks : MutableList<Book> = ArrayList<Book>()
 
-    val exampleItems: MutableList<Book> = ArrayList()
-
-    fun initaliseValues() {
-        exampleItems.add(Book("1", "Harry Potter", "", 0, emptyList(),
-            "", emptyList(), ""))
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        initaliseValues()
+
+        //Read from JSON Storage
+        val jsonReaderWriter = JSONReaderWriter()
+        currentBooks = jsonReaderWriter.readBooks(context!!)
 
         val view = inflater.inflate(R.layout.fragment_book_list, container, false)
 
@@ -43,7 +42,7 @@ class BookFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = MyBookRecyclerViewAdapter(exampleItems, listener)
+                adapter = MyBookRecyclerViewAdapter(currentBooks, listener)
                 //val dividerItemDecoration = DividerItemDecoration(this.context, layoutManager.orientation)
                 val dividerItemDecoration = DividerItemDecoration(this.context, 1)
                 this.addItemDecoration(dividerItemDecoration)

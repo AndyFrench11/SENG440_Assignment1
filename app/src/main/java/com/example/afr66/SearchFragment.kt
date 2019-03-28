@@ -81,10 +81,6 @@ class SearchFragment : Fragment() {
 
     }
 
-    fun updateSearchRecyclerView(finalBooks: List<Book>) {
-        viewAdapter.update(finalBooks)
-
-    }
 
     fun parameterizeUrl(url: String, parameters: Map<String, String>): URL {
         val builder = Uri.parse(url).buildUpon()
@@ -93,9 +89,7 @@ class SearchFragment : Fragment() {
         return URL(uri.toString())
     }
 
-    inner class Sender(val url: URL, val adapter: MySearchBookRecyclerViewAdapter)  {
-
-    }
+    inner class Sender(val url: URL, val adapter: MySearchBookRecyclerViewAdapter)
 
 
 }

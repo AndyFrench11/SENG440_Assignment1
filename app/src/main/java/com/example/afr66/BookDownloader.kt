@@ -46,10 +46,13 @@ class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {
                 pageCount = volumeInfo.getInt("pageCount")
             }
 
-            val authorsArray = volumeInfo.getJSONArray("authors")
-            val authors = (0 until authorsArray.length()).map { i ->
-                val author = authorsArray.getString(i)
-                author
+            var authors = emptyList<String>()
+            if(volumeInfo.has("authors")) {
+                val authorsArray = volumeInfo.getJSONArray("authors")
+                authors = (0 until authorsArray.length()).map { i ->
+                    val author = authorsArray.getString(i)
+                    author
+                }
             }
 
             var publishedDate = ""

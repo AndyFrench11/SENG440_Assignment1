@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal">
 
@@ -8,26 +9,35 @@
             android:id="@+id/bookPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:layout_weight="0.2"
-            android:layout_gravity="center"/>
+            android:src="@drawable/ic_book"
+
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/bookTitle"
+            android:layout_width="100pt"
+            android:layout_height="48dp"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:layout_weight="0.7"
-            android:gravity="center|left"/>
+
+            android:gravity="center|left" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/addToggleButton" app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <ToggleButton
-            android:text="ToggleButton"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:textOn="Added"
             android:textOff="Add"
-            android:id="@+id/toggleButton"
-            android:layout_weight="0.1"/>
+            android:id="@+id/addToggleButton"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
