@@ -6,13 +6,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".IndividualBookActivity"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true" android:id="@+id/coordinatorLayout">
 
     <android.support.design.widget.AppBarLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme.AppBarOverlay"
-            >
+    >
 
         <Toolbar
                 android:id="@+id/toolbar"
@@ -21,25 +21,104 @@
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 android:elevation="4dp"
-                />
+        />
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="55dp">
 
         <TextView
-                android:id="@+id/NameLabel"
-                android:layout_width="wrap_content"
+                android:text="TextView"
+                android:layout_width="218dp"
                 android:layout_height="wrap_content"
-                android:text="Don't you look handsome!"
-                android:textSize="30sp"
-                android:layout_centerInParent="true"/>
+                android:id="@+id/singleBookCurrentStatus"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="18sp" android:textStyle="bold"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/singleBookPageCount"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/singleBookPageCount"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="18sp" android:textStyle="normal"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/singleBookPublishedDate"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/singleBookPublishedDate"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="18sp" android:textStyle="normal"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/singleBookCategories"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/singleBookCategories"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="18sp" android:textStyle="normal"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/singleBookAuthors"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/singleBookAuthors"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="18sp" android:textStyle="normal"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/singleBookSubtitle"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/singleBookSubtitle"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="18sp" android:textStyle="italic"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/singleBookTitle"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="370dp"
+                android:layout_height="163dp"
+                android:id="@+id/singleBookDescription"
+                android:textSize="18sp"
+                android:scrollbars="vertical"
+                android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.478" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/singleBookCurrentStatus"/>
 
-    </RelativeLayout>
+        <ImageView
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:src="@drawable/ic_book"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp" app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/singleBookImage"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/singleBookTitle"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/singleBookImage" android:layout_marginStart="8dp"
+                android:textSize="24sp" android:textStyle="bold"
+        />
+        <Button
+                android:text="Update Bookmark!"
+                android:layout_width="370dp"
+                android:layout_height="53dp"
+                android:id="@+id/button"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.48" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

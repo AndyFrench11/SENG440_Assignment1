@@ -2,7 +2,9 @@ package com.example.afr66
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 public class Book(
     val title: String,
     val subtitle: String,
@@ -11,4 +13,4 @@ public class Book(
     val authors: List<String>,
     val publishedDate: String,
     val categories: List<String>,
-    val thumbnailURL : String) {}
+    val thumbnailURL : String) : Parcelable {}

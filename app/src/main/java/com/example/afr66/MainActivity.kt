@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onListFragmentInteraction(item: Book?) {
         val intent = Intent(this, IndividualBookActivity::class.java)
-        intent.putExtra("bookName", item?.title)
+        intent.putExtra("book", item)
         startActivity(intent)
         overridePendingTransition(R.anim.enter, R.anim.exit)
 
