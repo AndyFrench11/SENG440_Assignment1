@@ -4,11 +4,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Andy French</string>
     <string name="nav_header_subtitle">Welcome to Bookmark!</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_individual_book">IndividualBookActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="single_book_authors">Authors: </string>
+    <string name="single_book_categories">Categories: </string>
+    <string name="single_book_published_date">Published Date: </string>
+    <string name="single_book_page_count">Page Count: </string>
+    <string name="single_book_current_page">Current Page: </string>
+    <string name="single_book_current_chapter">Current Chapter: </string>
+    <string name="single_book_update_bookmark">Update Bookmark!</string>
 </resources>

@@ -2,15 +2,10 @@ package com.example.afr66
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.text.method.ScrollingMovementMethod
-
-
-
-
+import android.widget.ProgressBar
 
 
 class IndividualBookActivity : Activity() {
@@ -32,15 +27,21 @@ class IndividualBookActivity : Activity() {
         var singleBookSubtitle = findViewById<TextView>(R.id.singleBookSubtitle)
         singleBookSubtitle.text = book.subtitle
         var singleBookAuthors = findViewById<TextView>(R.id.singleBookAuthors)
-        singleBookAuthors.text = "Authors: " + book.authors.joinToString()
+        singleBookAuthors.text = book.authors.joinToString()
         var singleBookCategories = findViewById<TextView>(R.id.singleBookCategories)
-        singleBookCategories.text = "Categories: " + book.categories.joinToString()
+        singleBookCategories.text = book.categories.joinToString()
         var singleBookPublishedDate = findViewById<TextView>(R.id.singleBookPublishedDate)
-        singleBookPublishedDate.text = "Published Date: " + book.publishedDate
-        var singleBookPageCount = findViewById<TextView>(R.id.singleBookPageCount)
-        singleBookPageCount.text = "Page Count: " + book.pageCount.toString()
-        var singleBookCurrentStatus = findViewById<TextView>(R.id.singleBookCurrentStatus)
-        singleBookCurrentStatus.text = "You are currently on page ....."
+        singleBookPublishedDate.text = book.publishedDate
+        var singleBookCurrentChapterStatusValue = findViewById<TextView>(R.id.singleBookCurrentChapterStatusValue)
+        singleBookCurrentChapterStatusValue.text = "5"//TODO book.currentChapter
+        var singleBookCurrentPageStatusValue = findViewById<TextView>(R.id.singleBookCurrentPageStatusValue)
+        singleBookCurrentPageStatusValue.text = "200"//TODO book.currentChapter
+
+        var bookProgressBar = findViewById<ProgressBar>(R.id.bookProgressBar)
+        bookProgressBar.scaleY = 3f
+        var progressDecimal = 50.00 / book.pageCount.toDouble() * 100.00 //book.currentPage
+        bookProgressBar.progress = progressDecimal.toInt() //TODO book.currentPage
+
 
 
 
