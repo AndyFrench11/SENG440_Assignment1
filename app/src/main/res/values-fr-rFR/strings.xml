@@ -5,7 +5,8 @@
     <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
     <string name="nav_header_title">Andy French</string>
     <string name="nav_header_subtitle">Bienvenue sur Bookmark!</string>
-    <string name="action_settings">Réglages</string>
+    <string name="action_share">Partager!</string>
+    <string name="action_delete">Effacer</string>
     <string name="single_book_authors">"Auteurs: "</string>
     <string name="single_book_categories">"Catégories: "</string>
     <string name="single_book_published_date">"Date de Publication: "</string>

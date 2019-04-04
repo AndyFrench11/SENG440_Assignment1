@@ -30,8 +30,6 @@ class IndividualBookActivity : Activity() {
         var singleBookDescription = findViewById<TextView>(R.id.singleBookDescription)
         singleBookDescription.movementMethod = ScrollingMovementMethod()
         singleBookDescription.text = book.description
-        var singleBookSubtitle = findViewById<TextView>(R.id.singleBookSubtitle)
-        singleBookSubtitle.text = book.subtitle
         var singleBookAuthors = findViewById<TextView>(R.id.singleBookAuthors)
         singleBookAuthors.text = book.authors.joinToString()
         var singleBookCategories = findViewById<TextView>(R.id.singleBookCategories)
@@ -94,7 +92,7 @@ class IndividualBookActivity : Activity() {
             chapterPicker = (updateBookmarkView as ViewGroup).getChildAt(0) as NumberPicker
             chapterPicker.minValue = 0
             chapterPicker.value = book.currentChapter
-            chapterPicker.maxValue = 100
+            chapterPicker.maxValue = 99
 
             pagePicker = (updateBookmarkView as ViewGroup).getChildAt(1) as NumberPicker
             pagePicker.minValue = 0

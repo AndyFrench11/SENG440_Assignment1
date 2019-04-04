@@ -4,7 +4,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Andy French</string>
     <string name="nav_header_subtitle">Welcome to Bookmark!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_share">Share!</string>
+    <string name="action_delete">Delete</string>
     <string name="single_book_authors">Authors: </string>
     <string name="single_book_categories">Categories: </string>
     <string name="single_book_published_date">Published Date: </string>

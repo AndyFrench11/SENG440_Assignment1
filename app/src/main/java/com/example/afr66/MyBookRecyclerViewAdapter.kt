@@ -1,13 +1,16 @@
 package com.example.afr66
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.provider.Settings.Global.getString
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.animation.AnimationUtils
+import android.widget.*
 
 
 import com.example.afr66.BookFragment.OnListFragmentInteractionListener
@@ -21,12 +24,13 @@ import kotlinx.android.synthetic.main.fragment_search_book.view.*
  */
 class MyBookRecyclerViewAdapter(
 
-    private val mValues: List<Book>,
+    private val mValues: MutableList<Book>,
     private val mListener: OnListFragmentInteractionListener?
 
 ) : RecyclerView.Adapter<MyBookRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
+    lateinit var context : Context
 
     init {
         mOnClickListener = View.OnClickListener { v ->
@@ -41,7 +45,8 @@ class MyBookRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
+        context = parent.context
+        val view = LayoutInflater.from(context)
             .inflate(R.layout.fragment_book, parent, false)
         return ViewHolder(view)
     }
@@ -53,12 +58,29 @@ class MyBookRecyclerViewAdapter(
         //holder.mIdView.text = item.id
         holder.mContentView.text = item.title
         holder.mAuthorsView.text = item.authors.joinToString()
+        //TODO Change this to strings
         holder.mDetailsView.text = "Chapter: " + item.currentChapter + " - " + "Page: " + item.currentPage
 
         // Display an image to image view from url
         if(item.thumbnailURL != "") {
             DownloadBookImageTask(holder.mImageView)
                 .execute(item.thumbnailURL)
+        }
+
+
+        holder.mShareButton.setOnClickListener{
+            //TODO Finish off the Action
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            startActivity(context, intent, null)
+        }
+
+        holder.mDeleteButton.setOnClickListener{
+            //TODO add a dialog!
+            mValues.removeAt(position)
+            val jsonReaderWriter = JSONReaderWriter()
+            jsonReaderWriter.updateBooks(item, context, true)
+            notifyDataSetChanged()
         }
 
         holder.isActive = selectedIndex == position
@@ -76,6 +98,8 @@ class MyBookRecyclerViewAdapter(
         val mContentView: TextView = mView.myBookTitle
         val mAuthorsView: TextView = mView.myBookAuthors
         val mDetailsView: TextView = mView.myBookDetails
+        val mShareButton: Button = mView.shareButton
+        val mDeleteButton: Button = mView.deleteButton
 
         var isActive: Boolean = false
             set(value) {
