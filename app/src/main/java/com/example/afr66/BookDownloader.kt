@@ -76,7 +76,7 @@ class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {
                 thumbnailURL = imageLinks.getString("thumbnail")
             }
 
-            Book(title, subtitle, description, pageCount, authors, publishedDate, categories, thumbnailURL)
+            Book(title, subtitle, description, pageCount, authors, publishedDate, categories, thumbnailURL, 0, 0)
 
         }
 

@@ -1,6 +1,7 @@
 package com.example.afr66
 
 import android.graphics.Color
+import android.provider.Settings.Global.getString
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +52,8 @@ class MyBookRecyclerViewAdapter(
         val item = mValues[position]
         //holder.mIdView.text = item.id
         holder.mContentView.text = item.title
-        holder.mDetailsView.text = "Chapter: 5 - Page: 167"
+        holder.mAuthorsView.text = item.authors.joinToString()
+        holder.mDetailsView.text = "Chapter: " + item.currentChapter + " - " + "Page: " + item.currentPage
 
         // Display an image to image view from url
         if(item.thumbnailURL != "") {
@@ -72,6 +74,7 @@ class MyBookRecyclerViewAdapter(
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mImageView : ImageView = mView.myBookPhoto
         val mContentView: TextView = mView.myBookTitle
+        val mAuthorsView: TextView = mView.myBookAuthors
         val mDetailsView: TextView = mView.myBookDetails
 
         var isActive: Boolean = false

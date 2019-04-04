@@ -16,25 +16,31 @@
 
     <TextView
             android:id="@+id/myBookTitle"
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_width="340dp"
+            android:layout_height="20dp"
             android:textAppearance="?attr/textAppearanceListItem"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/myBookDetails"
             app:layout_constraintStart_toEndOf="@+id/myBookPhoto"
             android:layout_marginStart="8dp"
-            />
+    />
 
     <TextView
-
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:id="@+id/myBookDetails"
+            android:id="@+id/myBookAuthors"
+            android:layout_width="340dp"
+            android:layout_height="24dp"
             app:layout_constraintStart_toEndOf="@+id/myBookPhoto"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/myBookTitle"
+    />
+    <TextView
+
+            android:layout_width="340dp"
+            android:layout_height="20dp"
+            android:id="@+id/myBookDetails"
+            app:layout_constraintTop_toBottomOf="@+id/myBookAuthors"
+            app:layout_constraintStart_toEndOf="@+id/myBookPhoto" android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"/>
 
 </android.support.constraint.ConstraintLayout>

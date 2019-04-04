@@ -13,6 +13,7 @@ import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_book.view.*
@@ -66,8 +67,8 @@ class SearchFragment : Fragment() {
                 val url = parameterizeUrl("https://www.googleapis.com/books/v1/volumes", parameters)
 
                 val bookDownloader = BookDownloader()
-
                 bookDownloader.execute(Sender(url, viewAdapter))
+
 
                 searchBox.clearFocus()
 

@@ -56,6 +56,7 @@ class BookFragment() : Fragment() {
         if (context is OnListFragmentInteractionListener) {
             listener = context
         }
+
     }
 
     override fun onDetach() {

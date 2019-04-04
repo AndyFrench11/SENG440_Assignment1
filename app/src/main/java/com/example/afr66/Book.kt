@@ -13,4 +13,6 @@ public class Book(
     val authors: List<String>,
     val publishedDate: String,
     val categories: List<String>,
-    val thumbnailURL : String) : Parcelable {}
+    val thumbnailURL : String,
+    var currentChapter: Int,
+    var currentPage: Int) : Parcelable {}

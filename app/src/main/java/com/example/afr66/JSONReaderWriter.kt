@@ -37,9 +37,13 @@ class JSONReaderWriter() {
                     val categories = readStringsArray(reader)
                     reader.skipValue()
                     val thumbnailURL = reader.nextString()
+                    reader.skipValue()
+                    val currentChapter = reader.nextInt()
+                    reader.skipValue()
+                    val currentPage = reader.nextInt()
 
                     books.add(Book(title, subtitle, description, pageCount,
-                        authors, publishedDate, categories, thumbnailURL))
+                        authors, publishedDate, categories, thumbnailURL, currentChapter, currentPage))
                 }
                 reader.endObject()
             }
@@ -67,8 +71,14 @@ class JSONReaderWriter() {
         writer.setIndent("  ")
 
         if(delete) {
-            //May need to check if equals method is applied
-            books.remove(updateBook)
+            var index = 0
+            for(book in books) {
+                if((book.title == updateBook.title) && (book.description == updateBook.description)) {
+                    break
+                }
+                index++
+            }
+            books.removeAt(index)
         } else {
             books.add(updateBook)
         }
@@ -87,6 +97,57 @@ class JSONReaderWriter() {
             writer.name("categories")
             writeStringsArray(writer, book.categories)
             writer.name("thumbnailURL").value(book.thumbnailURL)
+            writer.name("currentChapter").value(book.currentChapter)
+            writer.name("currentPage").value(book.currentPage)
+            writer.endObject()
+        }
+
+
+        writer.endArray()
+
+        writer.close()
+
+    }
+
+    fun updateBooksNewChapterOrPage(updateBook: Book, context: Context, chapter: Int, page: Int) {
+
+        var books : MutableList<Book> = readBooks(context)
+
+        val file = context.openFileOutput("books.json", Context.MODE_PRIVATE)
+        val writer = JsonWriter(OutputStreamWriter(file))
+
+        writer.setIndent("  ")
+
+        var index = 0
+        for(book in books) {
+            if((book.title == updateBook.title) && (book.description == updateBook.description)) {
+                break
+            }
+            index++
+        }
+
+        books.removeAt(index)
+        updateBook.currentChapter = chapter
+        updateBook.currentPage = page
+        books.add(updateBook)
+
+
+        writer.beginArray()
+
+        for(book in books) {
+            writer.beginObject()
+            writer.name("title").value(book.title)
+            writer.name("subtitle").value(book.subtitle)
+            writer.name("description").value(book.description)
+            writer.name("pageCount").value(book.pageCount)
+            writer.name("authors")
+            writeStringsArray(writer, book.authors)
+            writer.name("publishedDate").value(book.publishedDate)
+            writer.name("categories")
+            writeStringsArray(writer, book.categories)
+            writer.name("thumbnailURL").value(book.thumbnailURL)
+            writer.name("currentChapter").value(book.currentChapter)
+            writer.name("currentPage").value(book.currentPage)
             writer.endObject()
         }
 

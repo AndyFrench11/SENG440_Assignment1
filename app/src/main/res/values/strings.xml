@@ -12,4 +12,14 @@
     <string name="single_book_current_page">Current Page: </string>
     <string name="single_book_current_chapter">Current Chapter: </string>
     <string name="single_book_update_bookmark">Update Bookmark!</string>
+    <string name="menu_goodbye">Goodbye!</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_my_books">My Books</string>
+    <string name="search_added">Added</string>
+    <string name="search_add">Add</string>
+    <string name="update_book_cancel">Cancel</string>
+    <string name="update_book_ok">Ok</string>
+    <string name="update_book_chapter">Chapter</string>
+    <string name="update_book_page">Page</string>
 </resources>

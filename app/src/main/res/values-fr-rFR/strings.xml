@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bookmark!</string>
+    <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="nav_header_title">Andy French</string>
+    <string name="nav_header_subtitle">Bienvenue sur Bookmark!</string>
+    <string name="action_settings">Réglages</string>
+    <string name="single_book_authors">"Auteurs: "</string>
+    <string name="single_book_categories">"Catégories: "</string>
+    <string name="single_book_published_date">"Date de Publication: "</string>
+    <string name="single_book_page_count">"Nombre de Pages: "</string>
+    <string name="single_book_current_page">"Page actuelle: "</string>
+    <string name="single_book_current_chapter">"Chapitre en cours: "</string>
+    <string name="single_book_update_bookmark">Mettre à jour le signet!</string>
+    <string name="menu_goodbye">Au revoir!</string>
+    <string name="menu_logout">Connectez - Out</string>
+    <string name="menu_search">Chercher</string>
+    <string name="menu_my_books">Mes Livres</string>
+    <string name="search_added">Ajouté</string>
+    <string name="search_add">Ajouter</string>
+    <string name="update_book_cancel">Annuler</string>
+    <string name="update_book_ok">D\'accord</string>
+    <string name="update_book_chapter">Chapitre</string>
+    <string name="update_book_page">Page</string>
+</resources>

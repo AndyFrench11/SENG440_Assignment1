@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
             nav_view.setCheckedItem(R.id.nav_myBooks)
-            toolbar.title = "My Books"
+            toolbar.title = getString(R.string.menu_my_books)
         }
 
     }
@@ -68,11 +68,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_myBooks -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
-                toolbar.title = "My Books"
+                toolbar.title = getString(R.string.menu_my_books)
             }
             R.id.nav_search -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SearchFragment()).commit()
-                toolbar.title = "Search"
+                toolbar.title = getString(R.string.menu_search)
             }
             R.id.nav_logout -> {
                 Toast.makeText(this, "No don't leave!!!!!!!", Toast.LENGTH_LONG).show()
