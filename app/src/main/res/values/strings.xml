@@ -23,4 +23,26 @@
     <string name="update_book_ok">Ok</string>
     <string name="update_book_chapter">Chapter</string>
     <string name="update_book_page">Page</string>
+    <string name="update_success">Successfully updated your Bookmark!</string>
+    <string name="update_message">Update the chapter and page number you are currently on!</string>
+    <string name="hyphen">" - "</string>
+    <string name="delete_book">Delete Book</string>
+    <string name="delete_book_sure">"Are you sure you want to delete "</string>
+    <string name="question_mark">"?"</string>
+    <string name="text_intent">Text</string>
+    <string name="email_intent">Email</string>
+    <string name="share_book">How would you like to share this book?</string>
+    <string-array name="contact_types">
+        <item>@string/text_intent</item>
+        <item>@string/email_intent</item>
+    </string-array>
+    <string name="share_first_line">Hi there! Have you seen this really cool new app Bookmark?!</string>
+    <string name="share_second_line">" I\'ve been using it to keep track of my progress when reading "</string>
+    <string name="share_by">" by "</string>
+    <string name="share_exclamation_mark">"!"</string>
+    <string name="share_final_line">" You should give it a go!"</string>
+    <string name="download_bookmark">Download Bookmark!</string>
+    <string name="list_current_page">"Page: "</string>
+    <string name="list_current_chapter">"Chapter: "</string>
+    <string name="dont_leave">No, don\'t leave!</string>
 </resources>

@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                val parameters = mapOf("q" to searchView.query.toString())
+                val parameters = mapOf("q" to searchView.query.toString(), "key" to "AIzaSyCeaVvGlf5ehcr2_uUcV5oU8pdO6b1BNOo")
                 val url = parameterizeUrl("https://www.googleapis.com/books/v1/volumes", parameters)
 
                 val bookDownloader = BookDownloader()

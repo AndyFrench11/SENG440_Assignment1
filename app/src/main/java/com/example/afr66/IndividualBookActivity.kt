@@ -43,7 +43,7 @@ class IndividualBookActivity : Activity() {
 
         var bookProgressBar = findViewById<ProgressBar>(R.id.bookProgressBar)
         bookProgressBar.scaleY = 3f
-        var progressDecimal = book.currentPage / book.pageCount.toDouble() * 100.00 //book.currentPage
+        var progressDecimal = book.currentPage / book.pageCount.toDouble() * 100.00
         bookProgressBar.progress = progressDecimal.toInt()
 
 
@@ -71,11 +71,11 @@ class IndividualBookActivity : Activity() {
 
                         singleBookCurrentChapterStatusValue.text = chapterPicker.value.toString()
                         singleBookCurrentPageStatusValue.text = pagePicker.value.toString()
-                        progressDecimal = pagePicker.value / book.pageCount.toDouble() * 100.00 //book.currentPage
+                        progressDecimal = pagePicker.value / book.pageCount.toDouble() * 100.00
                         bookProgressBar.progress = progressDecimal.toInt()
                         val jsonReaderWriter = JSONReaderWriter()
                         jsonReaderWriter.updateBooksNewChapterOrPage(book, context, chapterPicker.value, pagePicker.value)
-                        Toast.makeText(context, "Successfully updated your Bookmark!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_LONG).show()
 
                     })
                 setNeutralButton(R.string.update_book_cancel,
@@ -84,7 +84,7 @@ class IndividualBookActivity : Activity() {
                     })
             }
 
-            builder?.setTitle(R.string.single_book_update_bookmark).setMessage("Update the chapter and page number you are currently on!")
+            builder?.setTitle(R.string.single_book_update_bookmark).setMessage(R.string.update_message)
 
             val inflater = this.layoutInflater
             val updateBookmarkView = inflater.inflate(R.layout.update_bookmark_dialog, null)
@@ -116,7 +116,6 @@ class IndividualBookActivity : Activity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
-        //TODO Make fragment load again
-        //supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookFragment()).commit()
+
     }
 }

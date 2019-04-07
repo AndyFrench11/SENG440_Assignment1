@@ -24,4 +24,26 @@
     <string name="update_book_ok">D\'accord</string>
     <string name="update_book_chapter">Chapitre</string>
     <string name="update_book_page">Page</string>
+    <string name="update_success">Mis à jour avec succès votre signet!</string>
+    <string name="update_message">Mettez à jour le chapitre et le numéro de page sur lequel vous vous trouvez!</string>
+    <string name="hyphen">" - "</string>
+    <string name="delete_book">Supprimer le livre</string>
+    <string name="delete_book_sure">"Etes-vous sûr que vous voulez supprimer "</string>
+    <string name="question_mark">\?</string>
+    <string name="text_intent">Texte</string>
+    <string name="email_intent">Email</string>
+    <string name="share_book">Comment voudriez-vous partager ce livre?</string>
+    <string-array name="contact_types">
+        <item>@string/text_intent</item>
+        <item>@string/email_intent</item>
+    </string-array>
+    <string name="share_first_line">Salut! Avez-vous vu cette nouvelle application vraiment cool Bookmark?!</string>
+    <string name="share_second_line">" Je l\'ai utilisé pour suivre mes progrès lors de la lecture "</string>
+    <string name="share_by">" par "</string>
+    <string name="share_exclamation_mark">"!"</string>
+    <string name="share_final_line">" Vous devriez essayer!"</string>
+    <string name="download_bookmark">Télécharger Bookmark!</string>
+    <string name="list_current_page">"Page: "</string>
+    <string name="list_current_chapter">"Chapitre: "</string>
+    <string name="dont_leave">Non, ne pars pas!</string>
 </resources>

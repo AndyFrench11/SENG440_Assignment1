@@ -12,6 +12,7 @@ import java.security.AccessController.getContext
 import javax.net.ssl.HttpsURLConnection
 import android.R.attr.key
 import org.json.JSONArray
+import java.net.HttpURLConnection
 
 
 class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {

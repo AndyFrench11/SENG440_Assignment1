@@ -1,5 +1,6 @@
 package com.example.afr66
 
+import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
@@ -11,9 +12,11 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +26,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BookFragment.OnListFragmentInteractionListener {
 
     var currentBooks : MutableList<Book> = ArrayList<Book>()
+
+    val REDRAW_REQUEST = 1  // The request code
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 toolbar.title = getString(R.string.menu_search)
             }
             R.id.nav_logout -> {
-                Toast.makeText(this, "No don't leave!!!!!!!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.dont_leave), Toast.LENGTH_LONG).show()
             }
         }
 
@@ -86,10 +91,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onListFragmentInteraction(item: Book?) {
         val intent = Intent(this, IndividualBookActivity::class.java)
         intent.putExtra("book", item)
-        startActivity(intent)
+        startActivityForResult(intent, REDRAW_REQUEST)
         overridePendingTransition(R.anim.enter, R.anim.exit)
 
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        // Check which request we're responding to
+        if (requestCode == REDRAW_REQUEST) {
+            // Make sure the request was successful
+            val myBooksFragment = supportFragmentManager.fragments[0]
+            val view = myBooksFragment.view as RecyclerView
+            val adapter = view.adapter as MyBookRecyclerViewAdapter
+            adapter.customDataSetChanged(this)
+
+        }
     }
 
     override fun onStop() {
