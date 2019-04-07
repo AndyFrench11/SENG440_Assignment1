@@ -11,6 +11,7 @@ import java.nio.charset.Charset
 import java.security.AccessController.getContext
 import javax.net.ssl.HttpsURLConnection
 import android.R.attr.key
+import android.util.Log
 import org.json.JSONArray
 import java.net.HttpURLConnection
 
@@ -25,64 +26,68 @@ class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {
         adapter = sender[0].adapter
         val url = sender[0].url
         val result = getJson(url)
-        val itemsArray = result.getJSONArray("items")
-        val books = (0 until itemsArray.length()).map { i ->
-            val book = itemsArray.getJSONObject(i)
-            val volumeInfo = book.getJSONObject("volumeInfo")
-            val title = volumeInfo.getString("title")
-            var subtitle = ""
+        if(result.has("items")) {
+            val itemsArray = result.getJSONArray("items")
+            val books = (0 until itemsArray.length()).map { i ->
+                val book = itemsArray.getJSONObject(i)
+                val volumeInfo = book.getJSONObject("volumeInfo")
+                val title = volumeInfo.getString("title")
+                var subtitle = ""
 
-            if(volumeInfo.has("subtitile")) {
-                subtitle = volumeInfo.getString("subtitle")
-            }
-
-            var description = ""
-            if(volumeInfo.has("description")) {
-                description = volumeInfo.getString("description")
-            }
-
-
-            var pageCount = 0
-            if(volumeInfo.has("pageCount")) {
-                pageCount = volumeInfo.getInt("pageCount")
-            }
-
-            var authors = emptyList<String>()
-            if(volumeInfo.has("authors")) {
-                val authorsArray = volumeInfo.getJSONArray("authors")
-                authors = (0 until authorsArray.length()).map { i ->
-                    val author = authorsArray.getString(i)
-                    author
+                if (volumeInfo.has("subtitile")) {
+                    subtitle = volumeInfo.getString("subtitle")
                 }
-            }
 
-            var publishedDate = ""
-            if(volumeInfo.has("publishedDate")) {
-                publishedDate = volumeInfo.getString("publishedDate")
-            }
-
-
-            var categories = emptyList<String>()
-            if(volumeInfo.has("categories")) {
-                val categoriesArray = volumeInfo.getJSONArray("categories")
-                categories = (0 until categoriesArray.length()).map { i ->
-                    val category = categoriesArray.getString(i)
-                    category
+                var description = ""
+                if (volumeInfo.has("description")) {
+                    description = volumeInfo.getString("description")
                 }
+
+
+                var pageCount = 0
+                if (volumeInfo.has("pageCount")) {
+                    pageCount = volumeInfo.getInt("pageCount")
+                }
+
+                var authors = emptyList<String>()
+                if (volumeInfo.has("authors")) {
+                    val authorsArray = volumeInfo.getJSONArray("authors")
+                    authors = (0 until authorsArray.length()).map { i ->
+                        val author = authorsArray.getString(i)
+                        author
+                    }
+                }
+
+                var publishedDate = ""
+                if (volumeInfo.has("publishedDate")) {
+                    publishedDate = volumeInfo.getString("publishedDate")
+                }
+
+
+                var categories = emptyList<String>()
+                if (volumeInfo.has("categories")) {
+                    val categoriesArray = volumeInfo.getJSONArray("categories")
+                    categories = (0 until categoriesArray.length()).map { i ->
+                        val category = categoriesArray.getString(i)
+                        category
+                    }
+                }
+
+                var thumbnailURL = ""
+                if (volumeInfo.has("imageLinks")) {
+                    val imageLinks = volumeInfo.getJSONObject("imageLinks")
+                    thumbnailURL = imageLinks.getString("thumbnail")
+                }
+
+                Book(title, subtitle, description, pageCount, authors, publishedDate, categories, thumbnailURL, 0, 0)
+
             }
 
-            var thumbnailURL = ""
-            if(volumeInfo.has("imageLinks")) {
-                val imageLinks = volumeInfo.getJSONObject("imageLinks")
-                thumbnailURL = imageLinks.getString("thumbnail")
-            }
-
-            Book(title, subtitle, description, pageCount, authors, publishedDate, categories, thumbnailURL, 0, 0)
-
+            return books
+        } else {
+            Log.d("no success on the download - bad string", "book")
+            return emptyList()
         }
-
-
-        return books
 
     }
 
@@ -96,10 +101,13 @@ class BookDownloader() :  AsyncTask<SearchFragment.Sender, Void, List<Book>>() {
         try {
             val json = BufferedInputStream(connection.inputStream).readBytes().toString(Charset.defaultCharset())
             return JSONObject(json)
+        } catch(e: Exception) {
+            Log.d("no success on the download - bad string", "book")
+            return JSONObject()
         } finally {
-            connection.disconnect()
+                connection.disconnect()
+            }
         }
-    }
 
 
 
